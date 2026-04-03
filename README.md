@@ -37,8 +37,8 @@ Dans `backend/.env`, mettre :
 ```env
 DJANGO_SECRET_KEY=django-insecure-local-dev-only
 DJANGO_DEBUG=True
-DJANGO_ALLOWED_HOSTS=*
-CORS_ALLOWED_ORIGINS=http://localhost:5173,http://127.0.0.1:5173,http://localhost:8080,http://127.0.0.1:8080
+DJANGO_ALLOWED_HOSTS=hofatrano.tina-lalaina.site,tina-lalaina.site,localhost,127.0.0.1
+CORS_ALLOWED_ORIGINS=https://hofatrano.tina-lalaina.site,https://tina-lalaina.site,http://localhost:5173,http://127.0.0.1:5173,http://localhost:8080,http://127.0.0.1:8080
 
 DB_ENGINE=postgresql
 DB_NAME=gasycar

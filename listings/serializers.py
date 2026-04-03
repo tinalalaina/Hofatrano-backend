@@ -18,6 +18,20 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ["username", "email", "password", "first_name", "last_name", "role", "phone", "photo_url"]
 
+    def validate_username(self, value):
+        normalized_value = value.strip()
+        if User.objects.filter(username__iexact=normalized_value).exists():
+            raise serializers.ValidationError("Ce nom d'utilisateur est déjà utilisé.")
+        return normalized_value
+
+    def validate_email(self, value):
+        normalized_value = value.strip()
+        if not normalized_value:
+            return normalized_value
+        if User.objects.filter(email__iexact=normalized_value).exists():
+            raise serializers.ValidationError("Cette adresse e-mail est déjà utilisée.")
+        return normalized_value
+
     def create(self, validated_data):
         role = validated_data.pop("role", UserProfile.Role.CLIENT)
         phone = validated_data.pop("phone", "")

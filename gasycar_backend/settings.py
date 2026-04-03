@@ -8,7 +8,10 @@ load_dotenv(BASE_DIR / ".env")
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-local-dev-only")
 DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "*").split(",")
+ALLOWED_HOSTS = os.getenv(
+    "DJANGO_ALLOWED_HOSTS",
+    "hofatrano.tina-lalaina.site,localhost,127.0.0.1",
+).split(",")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -80,6 +83,13 @@ CORS_ALLOWED_ORIGINS = os.getenv(
     "https://hofatrano.tina-lalaina.site,https://tina-lalaina.site,http://localhost:5173,http://127.0.0.1:5173",
 ).split(",")
 
+
+CSRF_TRUSTED_ORIGINS = os.getenv(
+    "CSRF_TRUSTED_ORIGINS",
+    "https://hofatrano.tina-lalaina.site,https://tina-lalaina.site,http://localhost:5173,http://127.0.0.1:5173",
+).split(",")
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^http://localhost:\d+$",
     r"^http://127\.0\.0\.1:\d+$",

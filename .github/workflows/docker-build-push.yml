@@ -1,4 +1,4 @@
-name: Backend - Build & Deploy to VPS
+name: Backend - Build & Push only
 
 on:
   push:
@@ -6,11 +6,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout backend code
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Login to Docker Hub
@@ -19,7 +19,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push backend image
+      - name: Build and push backend
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -27,13 +27,3 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/hofatrano-backend:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/hofatrano-backend:${{ github.sha }}
-
-      - name: Deploy on VPS
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            cd /opt/gasy-car/infra
-            /opt/gasy-car/infra/deploy/deploy.sh "${{ secrets.DOCKERHUB_USERNAME }}" "latest"

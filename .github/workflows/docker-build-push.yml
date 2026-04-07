@@ -31,5 +31,5 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/gasy-car-backend:${{ github.sha }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/gasy-car-backend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/hofatrano-backend:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/hofatrano-backend:latest

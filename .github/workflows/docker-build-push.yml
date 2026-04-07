@@ -22,11 +22,11 @@ jobs:
       - name: Build and push backend image
         uses: docker/build-push-action@v6
         with:
-          context: .                     # dossier du backend
+          context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/gasy-car-backend:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/gasy-car-backend:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/hofatrano-backend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/hofatrano-backend:${{ github.sha }}
 
       - name: Deploy on VPS
         uses: appleboy/ssh-action@v1.0.3
